@@ -1,0 +1,2 @@
+,surgery_part,lt_kidney_vol,rt_kidney_vol,total_vol,remant_vol,remnant_vol_per,predicted_gfr_total,predicted_gfr_lt,predicted_gfr_rt,normalized_gfr,relative_uptake_rate_lt,relative_uptake_rate_rt,residual_relative_uptake_rate,remnant_normalized_gfr,age,sex,height,weight,sbp,dbp,serum_uric_acid,ldl,triglycerid,serum_creatinine,egfr,cystatin_c,cystatin_c_egfr,creatinine_clearance,hr_urine_creatinine,na_hr_urine,volume_hr_urine,bmi
+0,1,112,134,246,134,54.5,109.66,58.36,51.3,113.04,53.22,46.78,46.78,52.9,45,F,160,65.4,126,88,2.6,124,120,0.83,85.4,0,0,79,0.9,101,1000,25.54
