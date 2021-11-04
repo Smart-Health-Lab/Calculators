@@ -114,7 +114,13 @@ class App extends Component {
               <div>
                 <Breadcrumb style={{ margin: 10 }}>
                   <Breadcrumb.Item>
-                    <text style={{ textDecoration: "underline" }}>
+                    <text
+                      style={{
+                        fontSize: 17,
+                        fontWeight: 500,
+                        color: "#2b6e4d",
+                      }}
+                    >
                       Baseline information
                     </text>
                   </Breadcrumb.Item>
@@ -224,8 +230,14 @@ class App extends Component {
               <div>
                 <Breadcrumb style={{ margin: "10px" }}>
                   <Breadcrumb.Item>
-                    <text style={{ textDecoration: "underline" }}>
-                      test result
+                    <text
+                      style={{
+                        fontSize: 17,
+                        fontWeight: 500,
+                        color: "#2b6e4d",
+                      }}
+                    >
+                      Test result
                     </text>
                   </Breadcrumb.Item>
                 </Breadcrumb>
@@ -336,7 +348,13 @@ class App extends Component {
               <div>
                 <Breadcrumb style={{ margin: "10px" }}>
                   <Breadcrumb.Item>
-                    <text style={{ textDecoration: "underline" }}>
+                    <text
+                      style={{
+                        fontSize: 17,
+                        fontWeight: 500,
+                        color: "#2b6e4d",
+                      }}
+                    >
                       CT result
                     </text>
                   </Breadcrumb.Item>
@@ -390,7 +408,13 @@ class App extends Component {
               <div>
                 <Breadcrumb style={{ margin: "10px" }}>
                   <Breadcrumb.Item>
-                    <text style={{ textDecoration: "underline" }}>
+                    <text
+                      style={{
+                        fontSize: 17,
+                        fontWeight: 500,
+                        color: "#2b6e4d",
+                      }}
+                    >
                       DTPA result
                     </text>
                   </Breadcrumb.Item>
@@ -480,18 +504,40 @@ class App extends Component {
               </div>
             </div>
             <Divider />
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-start",
-                marginLeft: 20,
-              }}
-            >
+            <div style={{}}>
               <div style={{ display: "flex" }}>
+                <div
+                  style={{
+                    border: "1px solid #cccfce",
+                    width: "65vw",
+                    height: "8vh",
+                    marginLeft: 20,
+                    padding: 5,
+                  }}
+                >
+                  {this.state.output == null ? null : (
+                    <div>
+                      수술 이후 예상되는 환자의 eGFR은
+                      {
+                        <span style={{ fontWeight: "bold" }}>
+                          {" " + this.state.output + " "}
+                        </span>
+                      }
+                      입니다.
+                    </div>
+                  )}
+                </div>
                 <Button
                   type="primary"
                   size="large"
-                  style={{ backgroundColor: "#0b884a" }}
+                  style={{
+                    backgroundColor: "#2b6e4d",
+                    marginLeft: 20,
+                    width: "15vw",
+                    height: "8vh",
+                    fontFamily: "unset",
+                    fontSize: 25,
+                  }}
                   onClick={() => {
                     this.fetchFunc()
                       .then((res) => {
@@ -508,27 +554,6 @@ class App extends Component {
                 >
                   submit
                 </Button>
-                <div
-                  style={{
-                    border: "1px solid #cccfce",
-                    width: "65vw",
-                    height: "8vh",
-                    marginLeft: 115,
-                    padding: 5,
-                  }}
-                >
-                  {this.state.output == null ? null : (
-                    <div>
-                      수술 이후 예상되는 환자의 eGFR은
-                      {
-                        <span style={{ fontWeight: "bold" }}>
-                          {" " + this.state.output + " "}
-                        </span>
-                      }
-                      입니다.
-                    </div>
-                  )}
-                </div>
               </div>
             </div>
             <div style={{ display: "flex" }}></div>
