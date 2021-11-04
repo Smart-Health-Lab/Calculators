@@ -107,6 +107,7 @@ class App extends Component {
             style={{
               border: "1px solid #989c9a",
               height: "90vh",
+              width: "50vw",
               marginTop: 20,
             }}
           >
@@ -532,7 +533,8 @@ class App extends Component {
                   size="large"
                   style={{
                     backgroundColor: "#2b6e4d",
-                    marginLeft: 20,
+                    marginLeft: 15,
+                    marginRight: 20,
                     width: "15vw",
                     height: "8vh",
                     fontFamily: "unset",
