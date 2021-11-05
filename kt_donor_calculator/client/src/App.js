@@ -80,13 +80,13 @@ class App extends Component {
 
     return (
       <Layout className="layout">
-        <Header style={{ height: "4vh", background: "white" }}>
+        <Header style={{ height: "4.5vh", background: "white" }}>
           <div
             style={{
               fontFamily: "serif",
               color: "#0e7542",
               marginLeft: 10,
-              fontSize: 24,
+              fontSize: 20,
               fontWeight: 600,
             }}
           >
