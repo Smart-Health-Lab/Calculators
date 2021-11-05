@@ -59,7 +59,7 @@ class App extends Component {
   }
 
   fetchFunc = () => {
-    return fetch("http://127.0.0.1:5000/home", {
+    return fetch("http://13.125.121.209:5000/home", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -106,8 +106,8 @@ class App extends Component {
           <div
             style={{
               border: "1px solid #989c9a",
-              height: "90vh",
-              width: "50vw",
+              height: 860,
+              width: 700,
               marginTop: 20,
             }}
           >
