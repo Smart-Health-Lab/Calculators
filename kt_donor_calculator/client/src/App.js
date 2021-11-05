@@ -80,7 +80,7 @@ class App extends Component {
 
     return (
       <Layout className="layout">
-        <Header style={{ height: "5vh", background: "white" }}>
+        <Header style={{ height: "4vh", background: "white" }}>
           <div
             style={{
               fontFamily: "serif",
@@ -103,7 +103,7 @@ class App extends Component {
         <Content
           style={{
             padding: "0 50px",
-            height: "85vh",
+            // height: "85vh",
             background: "white",
           }}
         >
@@ -112,10 +112,18 @@ class App extends Component {
               border: "1px solid #989c9a",
               height: 860,
               width: 700,
-              marginTop: 20,
+              marginTop: 10,
+              padding: 10,
             }}
           >
-            <div style={{ display: "flex", marginTop: 10 }}>
+            <div
+              style={{
+                display: "flex",
+                marginTop: 5,
+                marginBottom: -30,
+                paddingBottom: 40,
+              }}
+            >
               <div>
                 <Breadcrumb style={{ margin: 10 }}>
                   <Breadcrumb.Item>
@@ -572,7 +580,7 @@ class App extends Component {
                 </div>
               </div>
             </div>
-            <Divider />
+            <Divider style={{ marginTop: 0 }} />
             <div style={{}}>
               <div style={{ display: "flex" }}>
                 <div
