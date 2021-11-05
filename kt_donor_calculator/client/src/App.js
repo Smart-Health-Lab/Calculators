@@ -59,7 +59,7 @@ class App extends Component {
   }
 
   fetchFunc = () => {
-    return fetch("http://13.125.121.209:5000/home", {
+    return fetch("http://54.180.162.218:5000/home", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
