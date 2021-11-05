@@ -93,4 +93,4 @@ def home():
     return {"status": 200, "output": str(round(predicted_val, 3))}
 
 
-app.run(debug=True)
+app.run(host='0.0.0.0', debug=True)
