@@ -14,6 +14,9 @@ import "./App.css";
 const { Header, Content, Footer } = Layout;
 const { Option } = Select;
 
+const titleFontSize = 13;
+const subTitleFontSize = 12;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -71,7 +74,7 @@ class App extends Component {
   };
 
   render() {
-    console.log("App.js rendering.. ", this.state);
+    // console.log("App.js rendering.. ", this.state);
     // console.log(String(1));
     // console.log(obj);
 
@@ -83,7 +86,8 @@ class App extends Component {
               fontFamily: "serif",
               color: "#0e7542",
               marginLeft: 10,
-              fontSize: 30,
+              fontSize: 24,
+              fontWeight: 600,
             }}
           >
             KT donor Calculator
@@ -111,13 +115,13 @@ class App extends Component {
               marginTop: 20,
             }}
           >
-            <div style={{ display: "flex", marginBottom: -20 }}>
+            <div style={{ display: "flex", marginTop: 10 }}>
               <div>
                 <Breadcrumb style={{ margin: 10 }}>
                   <Breadcrumb.Item>
                     <text
                       style={{
-                        fontSize: 17,
+                        fontSize: titleFontSize,
                         fontWeight: 500,
                         color: "#2b6e4d",
                       }}
@@ -127,7 +131,9 @@ class App extends Component {
                   </Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>수술시 나이</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    수술시 나이
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ age: event.target.value });
@@ -136,7 +142,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>성별</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    성별
+                  </div>
                   <Select
                     defaultValue={this.state.sex}
                     style={{ width: 100 }}
@@ -155,7 +163,9 @@ class App extends Component {
                   /> */}
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Height (cm)</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Height (cm)
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
@@ -171,7 +181,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Weight (kg)</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Weight (kg)
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
@@ -187,7 +199,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>SBP</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    SBP
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ sbp: event.target.value });
@@ -196,7 +210,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>DBP</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    DBP
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ dbp: event.target.value });
@@ -205,7 +221,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>수술부위 (lt: 1, rt:2)</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    수술부위 (lt: 1, rt:2)
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
@@ -216,7 +234,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>bmi</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    bmi
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
@@ -233,7 +253,7 @@ class App extends Component {
                   <Breadcrumb.Item>
                     <text
                       style={{
-                        fontSize: 17,
+                        fontSize: titleFontSize,
                         fontWeight: 500,
                         color: "#2b6e4d",
                       }}
@@ -243,7 +263,9 @@ class App extends Component {
                   </Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Serum uric acid</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Serum uric acid
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ serum_uric_acid: event.target.value });
@@ -252,7 +274,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>LDL</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    LDL
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ ldl: event.target.value });
@@ -261,7 +285,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Triglycerid</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Triglycerid
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ triglycerid: event.target.value });
@@ -270,7 +296,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Serum creatinine</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Serum creatinine
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ serum_creatinine: event.target.value });
@@ -279,7 +307,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>eGFR</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    eGFR
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ egfr: event.target.value });
@@ -288,7 +318,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Cystatin-C</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Cystatin-C
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ cystatin_c: event.target.value });
@@ -297,7 +329,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Cystatin-C eGFR</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Cystatin-C eGFR
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ cystatin_c_egfr: event.target.value });
@@ -306,7 +340,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Creatinine clearance</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Creatinine clearance
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
@@ -317,7 +353,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>24hr urine creatinine</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    24hr urine creatinine
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
@@ -328,7 +366,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Na, 24hr urine</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Na, 24hr urine
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ na_hr_urine: event.target.value });
@@ -337,7 +377,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Volume 24hr urine</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Volume 24hr urine
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ volume_hr_urine: event.target.value });
@@ -351,7 +393,7 @@ class App extends Component {
                   <Breadcrumb.Item>
                     <text
                       style={{
-                        fontSize: 17,
+                        fontSize: titleFontSize,
                         fontWeight: 500,
                         color: "#2b6e4d",
                       }}
@@ -361,7 +403,9 @@ class App extends Component {
                   </Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Lt.Kidney volume</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Lt.Kidney volume
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ lt_kidney_vol: event.target.value });
@@ -370,7 +414,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Rt.Kidney volume</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Rt.Kidney volume
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ rt_kidney_vol: event.target.value });
@@ -379,7 +425,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Total volume</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Total volume
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ total_vol: event.target.value });
@@ -388,7 +436,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Remnant volume</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Remnant volume
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ remnant_vol: event.target.value });
@@ -397,7 +447,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Remnant Volume percentage</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Remnant Volume percentage
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ remnant_vol_per: event.target.value });
@@ -411,7 +463,7 @@ class App extends Component {
                   <Breadcrumb.Item>
                     <text
                       style={{
-                        fontSize: 17,
+                        fontSize: titleFontSize,
                         fontWeight: 500,
                         color: "#2b6e4d",
                       }}
@@ -421,7 +473,9 @@ class App extends Component {
                   </Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Predicted GFR, total</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Predicted GFR, total
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
@@ -432,7 +486,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Predicted GFR, Lt</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Predicted GFR, Lt
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ predicted_gfr_lt: event.target.value });
@@ -441,7 +497,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Predicted GFR, Rt</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Predicted GFR, Rt
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ predicted_gfr_rt: event.target.value });
@@ -450,7 +508,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Normalized GFR</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Normalized GFR
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({ normalized_gfr: event.target.value });
@@ -459,7 +519,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>상대섭취율(Lt, %)</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    상대섭취율(Lt, %)
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
@@ -470,7 +532,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>상대섭취율(Rt, %)</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    상대섭취율(Rt, %)
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
@@ -481,7 +545,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>잔여상대섭취율(%)</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    잔여상대섭취율(%)
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
@@ -492,7 +558,9 @@ class App extends Component {
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>Remant normalized GFR</div>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Remant normalized GFR
+                  </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
@@ -558,7 +626,6 @@ class App extends Component {
                 </Button>
               </div>
             </div>
-            <div style={{ display: "flex" }}></div>
           </div>
         </Content>
       </Layout>
