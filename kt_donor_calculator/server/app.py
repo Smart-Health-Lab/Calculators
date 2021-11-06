@@ -67,30 +67,32 @@ cat_pipe = joblib.load("./utils/cat_pipe.joblib")
 @app.route('/home', methods=['POST'])
 def home():
     client_state_dict = request.get_json()
-    # print(client_state_dict)
+
     check_arr = ['sex', 'surgery_part', 'output']
     client_state_dict = dict({(key, float(val)) if key not in check_arr else (
         key, val) for key, val in client_state_dict.items()})
     client_state_dict.pop('output')
-    # print(len(client_state_dict))
 
     input_dict = {app_state_mapping.get(
         key): val for key, val in client_state_dict.items()}
     input_df = pd.DataFrame([input_dict])
-    # print(input_df.columns)
-    # print("length ========> ", len(input_df.columns))
-    # print(input_df.columns)
-    # print(input_df.values)
 
+    # Left predict
     inputX_cat = cat_pipe.transform(
         input_df[categorical_col].astype(str).values)
     inputX_num = input_df[numeric_col].values
     inputX = np.concatenate((inputX_num, inputX_cat.toarray()), axis=1)
-    # print(inputX)
-    predicted_val = XGBr.predict(inputX)[0]
-    # print('predicted_val ======> ', predicted_val)
+    predicted_val_Lt = XGBr.predict(inputX)[0]
 
-    return {"status": 200, "output": str(round(predicted_val, 3))}
+    # Right predict
+    input_df['수술부위'] = "2"
+    inputX_cat = cat_pipe.transform(
+        input_df[categorical_col].astype(str).values)
+    inputX_num = input_df[numeric_col].values
+    inputX = np.concatenate((inputX_num, inputX_cat.toarray()), axis=1)
+    predicted_val_Rt = XGBr.predict(inputX)[0]
+
+    return {"status": 200, "output": [str(round(predicted_val_Lt, 3)), str(round(predicted_val_Rt, 3))]}
 
 
 app.run(host='0.0.0.0', debug=True)

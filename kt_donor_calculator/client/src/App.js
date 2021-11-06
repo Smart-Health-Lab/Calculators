@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Layout,
-  Breadcrumb,
-  Input,
-  Divider,
-  Button,
-  Select,
-  Space,
-} from "antd";
+import { Layout, Breadcrumb, Input, Divider, Button, Select } from "antd";
 import { obj } from "./sampleData/sample_obj";
 import shl_img from "./image/shl_img.png";
 import "./App.css";
@@ -28,7 +20,7 @@ class App extends Component {
       weight: null,
       sbp: null,
       dbp: null,
-      surgery_part: null,
+      surgery_part: "1",
       lt_kidney_vol: null,
       rt_kidney_vol: null,
       total_vol: null,
@@ -54,7 +46,7 @@ class App extends Component {
       na_hr_urine: null,
       volume_hr_urine: null,
       bmi: null,
-      output: null,
+      output: [],
     };
   }
 
@@ -76,7 +68,10 @@ class App extends Component {
   };
 
   fetchFunc = () => {
-    return fetch("http://54.180.162.218:5000/home", {
+    // console.log("fetch flying..", stateObj);
+    // "http://54.180.162.218:5000/home" -> aws kt cal server
+
+    return fetch("http://0.0.0.0:5000/home", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -88,7 +83,7 @@ class App extends Component {
   };
 
   render() {
-    // console.log("App.js rendering.. ", this.state);
+    console.log("App.js rendering.. ", this.state);
     // console.log(String(1));
     // console.log(obj);
 
@@ -110,7 +105,7 @@ class App extends Component {
           </div>
           <img
             src={shl_img}
-            style={{ height: 35, marginTop: 15, marginLeft: 350 }}
+            style={{ height: 35, marginTop: 15, marginLeft: 450 }}
           />
         </Header>
         <Content
@@ -127,7 +122,7 @@ class App extends Component {
             style={{
               border: "1px solid #989c9a",
               height: 860,
-              width: 700,
+              width: 800,
               marginTop: 10,
               padding: 10,
             }}
@@ -248,7 +243,7 @@ class App extends Component {
                     value={this.state.dbp}
                   />
                 </div>
-                <div style={{ margin: 10 }}>
+                {/* <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
                     수술부위 (lt: 1, rt:2)
                   </div>
@@ -260,10 +255,10 @@ class App extends Component {
                     }}
                     value={this.state.surgery_part}
                   />
-                </div>
+                </div> */}
                 <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    bmi
+                    Bmi
                   </div>
                   <Input
                     onChange={(event) => {
@@ -598,6 +593,38 @@ class App extends Component {
                     value={this.state.remnant_normalized_gfr}
                   />
                 </div>
+                <div>
+                  <Button
+                    type="primary"
+                    size="large"
+                    style={{
+                      backgroundColor: "#2b6e4d",
+                      marginLeft: 15,
+                      marginRight: 20,
+                      marginTop: 115,
+                      width: 160,
+                      height: "4vh",
+                      fontFamily: "monospace",
+                      fontSize: 20,
+                    }}
+                    onClick={() => {
+                      this.fetchFunc()
+                        .then((res) => {
+                          return res.json();
+                        })
+                        .then((res) => {
+                          this.setState({
+                            output: res.output,
+                          });
+                        })
+                        .catch((err) => {
+                          console.log("fetch 통신 에러 -- ", err);
+                        });
+                    }}
+                  >
+                    submit
+                  </Button>
+                </div>
               </div>
             </div>
             <Divider style={{ marginTop: 0 }} />
@@ -606,7 +633,7 @@ class App extends Component {
                 <div
                   style={{
                     border: "1px solid #cccfce",
-                    width: "65vw",
+                    width: 740,
                     height: "8vh",
                     marginLeft: 20,
                     padding: 5,
@@ -614,44 +641,27 @@ class App extends Component {
                 >
                   {this.state.output == null ? null : (
                     <div>
-                      수술 이후 예상되는 환자의 eGFR은
-                      {
-                        <span style={{ fontWeight: "bold" }}>
-                          {" " + this.state.output + " "}
-                        </span>
-                      }
-                      입니다.
+                      <div>
+                        왼쪽 신장 수술 이후 예상되는 환자의 eGFR은
+                        {
+                          <span style={{ fontWeight: "bold" }}>
+                            {" " + this.state.output[0] + " "}
+                          </span>
+                        }
+                        입니다.
+                      </div>
+                      <div>
+                        오른쪽 신장 수술 이후 예상되는 환자의 eGFR은
+                        {
+                          <span style={{ fontWeight: "bold" }}>
+                            {" " + this.state.output[1] + " "}
+                          </span>
+                        }
+                        입니다.
+                      </div>
                     </div>
                   )}
                 </div>
-                <Button
-                  type="primary"
-                  size="large"
-                  style={{
-                    backgroundColor: "#2b6e4d",
-                    marginLeft: 15,
-                    marginRight: 20,
-                    width: "15vw",
-                    height: "8vh",
-                    fontFamily: "unset",
-                    fontSize: 25,
-                  }}
-                  onClick={() => {
-                    this.fetchFunc()
-                      .then((res) => {
-                        return res.json();
-                      })
-                      .then((res) => {
-                        console.log(res);
-                        this.setState({ output: res.output });
-                      })
-                      .catch((err) => {
-                        console.log("통신 에러 -- ", err);
-                      });
-                  }}
-                >
-                  submit
-                </Button>
               </div>
             </div>
           </div>
