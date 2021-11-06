@@ -102,11 +102,11 @@ class App extends Component {
               fontWeight: 600,
             }}
           >
-            KT donor Calculator
+            Kidney Donation with Nephric Intelligence (KDNI)
           </div>
           <img
             src={shl_img}
-            style={{ height: 35, marginTop: 15, marginLeft: 450 }}
+            style={{ height: 35, marginTop: 15, marginLeft: 170 }}
           />
         </Header>
         <Content
@@ -604,7 +604,7 @@ class App extends Component {
                       marginRight: 20,
                       marginTop: 115,
                       width: 160,
-                      height: "4vh",
+                      height: 60,
                       fontFamily: "monospace",
                       fontSize: 20,
                     }}
