@@ -61,6 +61,19 @@ class App extends Component {
     this.setState({ ...obj });
   }
 
+  refreshFunc = () => {
+    setTimeout(() => {
+      this.setState({
+        bmi:
+          Math.round(
+            (Number(this.state.weight) /
+              (Number(this.state.height) / 100) ** 2) *
+              100
+          ) / 100,
+      });
+    }, 300);
+  };
+
   fetchFunc = () => {
     return fetch("http://54.180.162.218:5000/home", {
       method: "POST",
@@ -74,7 +87,7 @@ class App extends Component {
   };
 
   render() {
-    // console.log("App.js rendering.. ", this.state);
+    console.log("App.js rendering.. ", this.state);
     // console.log(String(1));
     // console.log(obj);
 
@@ -179,11 +192,13 @@ class App extends Component {
                       this.setState({
                         height: event.target.value,
                         bmi:
-                          ((this.state.weight /
-                            (this.state.height / 100) ** 2) *
-                            100) /
-                          100,
+                          Math.round(
+                            (Number(this.state.weight) /
+                              (Number(this.state.height) / 100) ** 2) *
+                              100
+                          ) / 100,
                       });
+                      this.refreshFunc();
                     }}
                     value={this.state.height}
                   />
@@ -197,11 +212,13 @@ class App extends Component {
                       this.setState({
                         weight: event.target.value,
                         bmi:
-                          ((this.state.weight /
-                            (this.state.height / 100) ** 2) *
-                            100) /
-                          100,
+                          Math.round(
+                            (Number(this.state.weight) /
+                              (Number(this.state.height) / 100) ** 2) *
+                              100
+                          ) / 100,
                       });
+                      this.refreshFunc();
                     }}
                     value={this.state.weight}
                   />
