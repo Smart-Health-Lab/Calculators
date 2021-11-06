@@ -46,7 +46,7 @@ class App extends Component {
       na_hr_urine: null,
       volume_hr_urine: null,
       bmi: null,
-      output: [],
+      output: null,
     };
   }
 
@@ -78,6 +78,7 @@ class App extends Component {
       },
       body: JSON.stringify({
         ...this.state,
+        output: null,
       }),
     });
   };
