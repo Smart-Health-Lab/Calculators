@@ -71,7 +71,7 @@ class App extends Component {
     // console.log("fetch flying..", stateObj);
     // "http://54.180.162.218:5000/home" -> aws kt cal server
 
-    return fetch("http://0.0.0.0:5000/home", {
+    return fetch("http://54.180.162.218:5000/home", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -83,7 +83,7 @@ class App extends Component {
   };
 
   render() {
-    console.log("App.js rendering.. ", this.state);
+    // console.log("App.js rendering.. ", this.state);
     // console.log(String(1));
     // console.log(obj);
 
