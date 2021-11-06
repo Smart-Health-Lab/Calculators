@@ -9,6 +9,7 @@ import {
   Space,
 } from "antd";
 import { obj } from "./sampleData/sample_obj";
+import shl_img from "./image/shl_img.png";
 import "./App.css";
 
 const { Header, Content, Footer } = Layout;
@@ -87,13 +88,15 @@ class App extends Component {
   };
 
   render() {
-    console.log("App.js rendering.. ", this.state);
+    // console.log("App.js rendering.. ", this.state);
     // console.log(String(1));
     // console.log(obj);
 
     return (
       <Layout className="layout">
-        <Header style={{ height: "4.5vh", background: "white" }}>
+        <Header
+          style={{ display: "flex", height: "4.5vh", background: "white" }}
+        >
           <div
             style={{
               fontFamily: "serif",
@@ -105,16 +108,16 @@ class App extends Component {
           >
             KT donor Calculator
           </div>
-          <div />
-          {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
-            {new Array(0).fill(null).map((_, index) => {
-              const key = index + 1;
-              return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>;
-            })}
-          </Menu> */}
+          <img
+            src={shl_img}
+            style={{ height: 35, marginTop: 15, marginLeft: 350 }}
+          />
         </Header>
         <Content
           style={{
+            display: "flex",
+            flexDirection: "column",
+            // alignItems: "center",
             padding: "0 50px",
             // height: "85vh",
             background: "white",
