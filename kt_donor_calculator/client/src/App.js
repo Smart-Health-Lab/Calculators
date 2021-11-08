@@ -100,13 +100,14 @@ class App extends Component {
               marginLeft: 10,
               fontSize: 20,
               fontWeight: 600,
+              width: 700,
             }}
           >
             KDNI (Kidney Donation with Nephrologic Intelligence)
           </div>
           <img
             src={shl_img}
-            style={{ height: 27, marginTop: 15, marginLeft: 170 }}
+            style={{ height: 27, marginTop: 15, marginRight: 100 }}
           />
         </Header>
         <Content
