@@ -78,6 +78,11 @@ def home():
     input_df = pd.DataFrame([input_dict])
 
     # Left predict
+    input_df['수술부위'] = "1"
+    input_df['Remnant Volume'] = input_df['Rt. Kidney volume']
+    input_df['Remnant Volume percentage'] = round(
+        (input_df['Rt. Kidney volume'] / input_df['Total volume'])*100, 2)
+    input_df['잔여상대섭취율(%)'] = input_df['상대섭취율(Rt, %)']
     inputX_cat = cat_pipe.transform(
         input_df[categorical_col].astype(str).values)
     inputX_num = input_df[numeric_col].values
@@ -86,11 +91,18 @@ def home():
 
     # Right predict
     input_df['수술부위'] = "2"
+    input_df['Remnant Volume'] = input_df['Lt. Kidney volume']
+    input_df['Remnant Volume percentage'] = round(
+        (input_df['Lt. Kidney volume'] / input_df['Total volume'])*100, 2)
+    input_df['잔여상대섭취율(%)'] = input_df['상대섭취율(Lt, %)']
     inputX_cat = cat_pipe.transform(
         input_df[categorical_col].astype(str).values)
     inputX_num = input_df[numeric_col].values
     inputX = np.concatenate((inputX_num, inputX_cat.toarray()), axis=1)
     predicted_val_Rt = XGBr.predict(inputX)[0]
+
+    print("predicted_Lt : ", predicted_val_Lt)
+    print("predicted_Rt : ", predicted_val_Rt)
 
     return {"status": 200, "output": [str(round(predicted_val_Lt, 3)), str(round(predicted_val_Rt, 3))]}
 
