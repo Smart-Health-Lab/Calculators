@@ -471,36 +471,11 @@ class App extends Component {
                     Total volume
                   </div>
                   <Input
+                    disabled={true}
                     onChange={(event) => {
                       this.setState({ total_vol: Number(event.target.value) });
                     }}
-                    value={this.state.total_vol}
-                  />
-                </div>
-                <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Remnant volume
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({
-                        remnant_vol: Number(event.target.value),
-                      });
-                    }}
-                    value={this.state.remnant_vol}
-                  />
-                </div>
-                <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Remnant Volume percentage
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({
-                        remnant_vol_per: Number(event.target.value),
-                      });
-                    }}
-                    value={this.state.remnant_vol_per}
+                    value={this.state.lt_kidney_vol + this.state.rt_kidney_vol}
                   />
                 </div>
               </div>
@@ -518,19 +493,7 @@ class App extends Component {
                     </text>
                   </Breadcrumb.Item>
                 </Breadcrumb>
-                <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Predicted GFR, total
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({
-                        predicted_gfr_total: Number(event.target.value),
-                      });
-                    }}
-                    value={this.state.predicted_gfr_total}
-                  />
-                </div>
+
                 <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
                     Predicted GFR, Lt
@@ -555,6 +518,22 @@ class App extends Component {
                       });
                     }}
                     value={this.state.predicted_gfr_rt}
+                  />
+                </div>
+                <div style={{ margin: 10 }}>
+                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                    Predicted GFR, total
+                  </div>
+                  <Input
+                    disabled={true}
+                    onChange={(event) => {
+                      this.setState({
+                        predicted_gfr_total: Number(event.target.value),
+                      });
+                    }}
+                    value={
+                      this.state.predicted_gfr_lt + this.state.predicted_gfr_rt
+                    }
                   />
                 </div>
                 <div style={{ margin: 10 }}>
@@ -596,7 +575,7 @@ class App extends Component {
                     value={this.state.relative_uptake_rate_rt}
                   />
                 </div>
-                <div style={{ margin: 10 }}>
+                {/* <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
                     잔여상대섭취율(%)
                   </div>
@@ -610,10 +589,10 @@ class App extends Component {
                     }}
                     value={this.state.residual_relative_uptake_rate}
                   />
-                </div>
+                </div> */}
                 <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Remant normalized GFR
+                    Remnant normalized GFR
                   </div>
                   <Input
                     onChange={(event) => {
