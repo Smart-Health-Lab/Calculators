@@ -143,7 +143,7 @@ class App extends Component {
                     <text
                       style={{
                         fontSize: titleFontSize,
-                        fontWeight: 500,
+                        fontWeight: 700,
                         color: "#2b6e4d",
                       }}
                     >
@@ -281,7 +281,7 @@ class App extends Component {
                     <text
                       style={{
                         fontSize: titleFontSize,
-                        fontWeight: 500,
+                        fontWeight: 700,
                         color: "#2b6e4d",
                       }}
                     >
@@ -433,7 +433,7 @@ class App extends Component {
                     <text
                       style={{
                         fontSize: titleFontSize,
-                        fontWeight: 500,
+                        fontWeight: 700,
                         color: "#2b6e4d",
                       }}
                     >
@@ -486,7 +486,7 @@ class App extends Component {
                     <text
                       style={{
                         fontSize: titleFontSize,
-                        fontWeight: 500,
+                        fontWeight: 700,
                         color: "#2b6e4d",
                       }}
                     >
