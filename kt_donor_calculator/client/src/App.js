@@ -102,7 +102,7 @@ class App extends Component {
               fontWeight: 600,
             }}
           >
-            Kidney Donation with Nephric Intelligence (KDNI)
+            KDNI (Kidney Donation with Nephric Intelligence)
           </div>
           <img
             src={shl_img}
