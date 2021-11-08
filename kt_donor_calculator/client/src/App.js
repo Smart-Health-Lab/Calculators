@@ -107,7 +107,7 @@ class App extends Component {
           </div>
           <img
             src={shl_img}
-            style={{ height: 27, marginTop: 15, marginLeft: 20 }}
+            style={{ height: 27, marginTop: 15, marginLeft: 70 }}
           />
         </Header>
         <Content
