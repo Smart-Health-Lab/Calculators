@@ -156,7 +156,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ age: event.target.value });
+                      this.setState({ age: Number(event.target.value) });
                     }}
                     value={this.state.age}
                   />
@@ -189,7 +189,7 @@ class App extends Component {
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        height: event.target.value,
+                        height: Number(event.target.value),
                         bmi:
                           Math.round(
                             (Number(this.state.weight) /
@@ -209,7 +209,7 @@ class App extends Component {
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        weight: event.target.value,
+                        weight: Number(event.target.value),
                         bmi:
                           Math.round(
                             (Number(this.state.weight) /
@@ -228,7 +228,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ sbp: event.target.value });
+                      this.setState({ sbp: Number(event.target.value) });
                     }}
                     value={this.state.sbp}
                   />
@@ -239,7 +239,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ dbp: event.target.value });
+                      this.setState({ dbp: Number(event.target.value) });
                     }}
                     value={this.state.dbp}
                   />
@@ -264,7 +264,9 @@ class App extends Component {
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        bmi: this.state.weight / Math.sqrt(this.state.height),
+                        bmi: Number(
+                          this.state.weight / Math.sqrt(this.state.height)
+                        ),
                       });
                     }}
                     value={this.state.bmi}
@@ -292,7 +294,9 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ serum_uric_acid: event.target.value });
+                      this.setState({
+                        serum_uric_acid: Number(event.target.value),
+                      });
                     }}
                     value={this.state.serum_uric_acid}
                   />
@@ -303,7 +307,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ ldl: event.target.value });
+                      this.setState({ ldl: Number(event.target.value) });
                     }}
                     value={this.state.ldl}
                   />
@@ -314,7 +318,9 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ triglycerid: event.target.value });
+                      this.setState({
+                        triglycerid: Number(event.target.value),
+                      });
                     }}
                     value={this.state.triglycerid}
                   />
@@ -325,7 +331,9 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ serum_creatinine: event.target.value });
+                      this.setState({
+                        serum_creatinine: Number(event.target.value),
+                      });
                     }}
                     value={this.state.serum_creatinine}
                   />
@@ -336,7 +344,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ egfr: event.target.value });
+                      this.setState({ egfr: Number(event.target.value) });
                     }}
                     value={this.state.egfr}
                   />
@@ -347,7 +355,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ cystatin_c: event.target.value });
+                      this.setState({ cystatin_c: Number(event.target.value) });
                     }}
                     value={this.state.cystatin_c}
                   />
@@ -358,7 +366,9 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ cystatin_c_egfr: event.target.value });
+                      this.setState({
+                        cystatin_c_egfr: Number(event.target.value),
+                      });
                     }}
                     value={this.state.cystatin_c_egfr}
                   />
@@ -370,7 +380,7 @@ class App extends Component {
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        creatinine_clearance: event.target.value,
+                        creatinine_clearance: Number(event.target.value),
                       });
                     }}
                     value={this.state.creatinine_clearance}
@@ -383,7 +393,7 @@ class App extends Component {
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        hr_urine_creatinine: event.target.value,
+                        hr_urine_creatinine: Number(event.target.value),
                       });
                     }}
                     value={this.state.hr_urine_creatinine}
@@ -395,7 +405,9 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ na_hr_urine: event.target.value });
+                      this.setState({
+                        na_hr_urine: Number(event.target.value),
+                      });
                     }}
                     value={this.state.na_hr_urine}
                   />
@@ -406,7 +418,9 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ volume_hr_urine: event.target.value });
+                      this.setState({
+                        volume_hr_urine: Number(event.target.value),
+                      });
                     }}
                     value={this.state.volume_hr_urine}
                   />
@@ -432,7 +446,9 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ lt_kidney_vol: event.target.value });
+                      this.setState({
+                        lt_kidney_vol: Number(event.target.value),
+                      });
                     }}
                     value={this.state.lt_kidney_vol}
                   />
@@ -443,7 +459,9 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ rt_kidney_vol: event.target.value });
+                      this.setState({
+                        rt_kidney_vol: Number(event.target.value),
+                      });
                     }}
                     value={this.state.rt_kidney_vol}
                   />
@@ -454,7 +472,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ total_vol: event.target.value });
+                      this.setState({ total_vol: Number(event.target.value) });
                     }}
                     value={this.state.total_vol}
                   />
@@ -465,7 +483,9 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ remnant_vol: event.target.value });
+                      this.setState({
+                        remnant_vol: Number(event.target.value),
+                      });
                     }}
                     value={this.state.remnant_vol}
                   />
@@ -476,7 +496,9 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ remnant_vol_per: event.target.value });
+                      this.setState({
+                        remnant_vol_per: Number(event.target.value),
+                      });
                     }}
                     value={this.state.remnant_vol_per}
                   />
@@ -503,7 +525,7 @@ class App extends Component {
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        predicted_gfr_total: event.target.value,
+                        predicted_gfr_total: Number(event.target.value),
                       });
                     }}
                     value={this.state.predicted_gfr_total}
@@ -515,7 +537,9 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ predicted_gfr_lt: event.target.value });
+                      this.setState({
+                        predicted_gfr_lt: Number(event.target.value),
+                      });
                     }}
                     value={this.state.predicted_gfr_lt}
                   />
@@ -526,7 +550,9 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ predicted_gfr_rt: event.target.value });
+                      this.setState({
+                        predicted_gfr_rt: Number(event.target.value),
+                      });
                     }}
                     value={this.state.predicted_gfr_rt}
                   />
@@ -537,7 +563,9 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ normalized_gfr: event.target.value });
+                      this.setState({
+                        normalized_gfr: Number(event.target.value),
+                      });
                     }}
                     value={this.state.normalized_gfr}
                   />
@@ -549,7 +577,7 @@ class App extends Component {
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        relative_uptake_rate_lt: event.target.value,
+                        relative_uptake_rate_lt: Number(event.target.value),
                       });
                     }}
                     value={this.state.relative_uptake_rate_lt}
@@ -562,7 +590,7 @@ class App extends Component {
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        relative_uptake_rate_rt: event.target.value,
+                        relative_uptake_rate_rt: Number(event.target.value),
                       });
                     }}
                     value={this.state.relative_uptake_rate_rt}
@@ -575,7 +603,9 @@ class App extends Component {
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        residual_relative_uptake_rate: event.target.value,
+                        residual_relative_uptake_rate: Number(
+                          event.target.value
+                        ),
                       });
                     }}
                     value={this.state.residual_relative_uptake_rate}
@@ -588,7 +618,7 @@ class App extends Component {
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        remnant_normalized_gfr: event.target.value,
+                        remnant_normalized_gfr: Number(event.target.value),
                       });
                     }}
                     value={this.state.remnant_normalized_gfr}
