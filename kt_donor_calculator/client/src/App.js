@@ -678,7 +678,7 @@ class App extends Component {
                         })
                         .then((res) => {
                           this.setState({
-                            output: res.output,
+                            output: JSON.parse(res.output),
                           });
                         })
                         .catch((err) => {
@@ -713,7 +713,7 @@ class App extends Component {
                         kidney is
                         {
                           <span style={{ fontWeight: "bold" }}>
-                            {" " + Number(this.state.output) + ". "}
+                            {" " + this.state.output + ". "}
                           </span>
                         }
                       </div>
@@ -723,7 +723,7 @@ class App extends Component {
                         kidney is
                         {
                           <span style={{ fontWeight: "bold" }}>
-                            {" " + Number(this.state.output) + ". "}
+                            {" " + this.state.output + ". "}
                           </span>
                         }
                       </div>
