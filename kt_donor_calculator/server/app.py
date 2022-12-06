@@ -121,7 +121,7 @@ def home():
     # print("predicted_Lt : ", predicted_val_Lt)
     # print("predicted_Rt : ", predicted_val_Rt)
 
-    return json.dumps([{"status": 200, "output": predicted_val}])
+    return {"status": 200, "output": json.dumps(str(predicted_val))}
 
 
 app.run(host='0.0.0.0', debug=True)
