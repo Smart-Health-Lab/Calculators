@@ -9,6 +9,7 @@ const { Option } = Select;
 
 const titleFontSize = 13;
 const subTitleFontSize = 12;
+let submit_clicked = false;
 
 class App extends Component {
   constructor(props) {
@@ -39,16 +40,16 @@ class App extends Component {
   }
 
   refreshFunc = () => {
-    setTimeout(() => {
-      this.setState({
-        bmi:
-          Math.round(
-            (Number(this.state.weight) /
-              (Number(this.state.height) / 100) ** 2) *
-              100
-          ) / 100,
-      });
-    }, 300);
+    // setTimeout(() => {
+    //   this.setState({
+    //     bmi:
+    //       Math.round(
+    //         (Number(this.state.weight) /
+    //           (Number(this.state.height) / 100) ** 2) *
+    //           100
+    //       ) / 100,
+    //   });
+    // }, 300);
   };
 
   fetchFunc = () => {
@@ -150,6 +151,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
+                      submit_clicked = false;
                       this.setState({
                         Age: event.target.value,
                       });
@@ -171,6 +173,7 @@ class App extends Component {
                     defaultValue={this.state.Sex}
                     style={{ width: 100 }}
                     onChange={(sex) => {
+                      submit_clicked = false;
                       this.setState({ Sex: sex });
                     }}
                   >
@@ -190,6 +193,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
+                      submit_clicked = false;
                       this.setState({
                         Weight: event.target.value,
                       });
@@ -222,9 +226,10 @@ class App extends Component {
                     defaultValue={this.state["Removed side (right or left)"]}
                     style={{ width: 100 }}
                     onChange={(side) => {
+                      submit_clicked = false;
                       // right => 2
                       // left => 1 , 이 숫자 변경 불가능 (모델 학습에 반영됨)
-                      this.state["Removed side (right or left)"] = side;
+                      this.setState({ "Removed side (right or left)": side });
                       // this.setState({
                       //   "Removed side (right(2) or left(1))": side,
                       // });
@@ -262,43 +267,6 @@ class App extends Component {
                     </text>
                   </Breadcrumb.Item>
                 </Breadcrumb>
-                {/* <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Serum uric acid
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({
-                        serum_uric_acid: event.target.value,
-                      });
-                    }}
-                    value={this.state.serum_uric_acid}
-                  />
-                </div> */}
-                {/* <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    LDL
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({ ldl: event.target.value });
-                    }}
-                    value={this.state.ldl}
-                  />
-                </div> */}
-                {/* <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Triglycerid
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({
-                        triglycerid: event.target.value,
-                      });
-                    }}
-                    value={this.state.triglycerid}
-                  />
-                </div> */}
                 <div style={{ margin: 10 }}>
                   <div
                     style={{
@@ -311,6 +279,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
+                      submit_clicked = false;
                       this.setState({
                         "Serum creatinine": event.target.value,
                       });
@@ -330,6 +299,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
+                      submit_clicked = false;
                       this.setState({ eGFR: event.target.value });
                     }}
                     value={this.state.eGFR}
@@ -347,6 +317,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
+                      submit_clicked = false;
                       this.setState({ "Cystatin-C": event.target.value });
                     }}
                     value={this.state["Cystatin-C"]}
@@ -364,6 +335,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
+                      submit_clicked = false;
                       this.setState({
                         "Cystatin-C eGFR": event.target.value,
                       });
@@ -383,6 +355,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
+                      submit_clicked = false;
                       this.setState({
                         "24-hour creatinine clearance": event.target.value,
                       });
@@ -402,6 +375,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
+                      submit_clicked = false;
                       this.setState({
                         "24-hour urine creatinine": event.target.value,
                       });
@@ -421,6 +395,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
+                      submit_clicked = false;
                       this.setState({
                         "24-hour urine sodium excretion": event.target.value,
                       });
@@ -428,19 +403,6 @@ class App extends Component {
                     value={this.state["24-hour urine sodium excretion"]}
                   />
                 </div>
-                {/* <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Volume 24hr urine
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({
-                        volume_hr_urine: event.target.value,
-                      });
-                    }}
-                    value={this.state.volume_hr_urine}
-                  />
-                </div> */}
               </div>
               <div>
                 <Breadcrumb style={{ margin: "10px" }}>
@@ -462,6 +424,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
+                      submit_clicked = false;
                       this.setState({
                         "CT volume (right)": event.target.value,
                       });
@@ -475,6 +438,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
+                      submit_clicked = false;
                       this.setState({
                         "CT volume (left)": event.target.value,
                       });
@@ -538,103 +502,6 @@ class App extends Component {
                     </text>
                   </Breadcrumb.Item>
                 </Breadcrumb>
-                {/* <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Predicted GFR, Lt
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({
-                        predicted_gfr_lt: event.target.value,
-                      });
-                    }}
-                    value={this.state.predicted_gfr_lt}
-                  />
-                </div>
-                <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Predicted GFR, Rt
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({
-                        predicted_gfr_rt: event.target.value,
-                      });
-                    }}
-                    value={this.state.predicted_gfr_rt}
-                  />
-                </div>
-                <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Predicted GFR, total
-                  </div>
-                  <Input
-                    disabled={true}
-                    onChange={(event) => {
-                      this.setState({
-                        predicted_gfr_total: event.target.value,
-                      });
-                    }}
-                    value={
-                      Number(this.state.predicted_gfr_lt) +
-                      Number(this.state.predicted_gfr_rt)
-                    }
-                  />
-                </div>
-                <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Normalized GFR
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({
-                        normalized_gfr: event.target.value,
-                      });
-                    }}
-                    value={this.state.normalized_gfr}
-                  />
-                </div>
-                <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    상대섭취율(Lt, %)
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({
-                        relative_uptake_rate_lt: event.target.value,
-                      });
-                    }}
-                    value={this.state.relative_uptake_rate_lt}
-                  />
-                </div>
-                <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    상대섭취율(Rt, %)
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({
-                        relative_uptake_rate_rt: event.target.value,
-                      });
-                    }}
-                    value={this.state.relative_uptake_rate_rt}
-                  />
-                </div> */}
-                {/* <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    잔여상대섭취율(%)
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({
-                        residual_relative_uptake_rate: Number(
-                          event.target.value
-                        ),
-                      });
-                    }}
-                    value={this.state.residual_relative_uptake_rate}
-                  />
-                </div> */}
                 <div style={{ margin: 10 }}>
                   <div
                     style={{
@@ -647,6 +514,7 @@ class App extends Component {
                   </div>
                   <Input
                     onChange={(event) => {
+                      submit_clicked = false;
                       this.setState({
                         "Normalized GFR of remaining kidney":
                           event.target.value,
@@ -672,6 +540,7 @@ class App extends Component {
                       fontSize: 20,
                     }}
                     onClick={() => {
+                      submit_clicked = true;
                       this.fetchFunc()
                         .then((res) => {
                           return res.json();
@@ -704,7 +573,7 @@ class App extends Component {
                     // padding: 5,
                   }}
                 >
-                  {
+                  {submit_clicked === true ? (
                     this.state.output == null ? null : this.state[
                         "Removed side (right or left)"
                       ] === "2" ? (
@@ -728,27 +597,9 @@ class App extends Component {
                         }
                       </div>
                     )
-                    // <div>
-                    //   <div>
-                    //     왼쪽 신장 수술 이후 예상되는 환자의 eGFR은
-                    //     {
-                    //       <span style={{ fontWeight: "bold" }}>
-                    //         {" " + this.state.output[0] + " "}
-                    //       </span>
-                    //     }
-                    //     입니다.
-                    //   </div>
-                    //   <div>
-                    //     오른쪽 신장 수술 이후 예상되는 환자의 eGFR은
-                    //     {
-                    //       <span style={{ fontWeight: "bold" }}>
-                    //         {" " + this.state.output[1] + " "}
-                    //       </span>
-                    //     }
-                    //     입니다.
-                    //   </div>
-                    // </div>
-                  }
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
               </div>
             </div>
