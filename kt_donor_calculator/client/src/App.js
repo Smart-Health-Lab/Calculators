@@ -713,7 +713,7 @@ class App extends Component {
                         kidney is
                         {
                           <span style={{ fontWeight: "bold" }}>
-                            {" " + this.state.output + " "}
+                            {" " + this.state.output + ". "}
                           </span>
                         }
                       </div>
@@ -723,7 +723,7 @@ class App extends Component {
                         kidney is
                         {
                           <span style={{ fontWeight: "bold" }}>
-                            {" " + this.state.output + " "}
+                            {" " + this.state.output + ". "}
                           </span>
                         }
                       </div>
