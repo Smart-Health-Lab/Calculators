@@ -14,38 +14,22 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      age: null,
-      sex: null,
-      height: null,
-      weight: null,
-      sbp: null,
-      dbp: null,
-      surgery_part: "1",
-      lt_kidney_vol: null,
-      rt_kidney_vol: null,
-      total_vol: null,
-      remnant_vol: null,
-      remnant_vol_per: null,
-      predicted_gfr_total: null,
-      predicted_gfr_lt: null,
-      predicted_gfr_rt: null,
-      normalized_gfr: null,
-      relative_uptake_rate_lt: null,
-      relative_uptake_rate_rt: null,
-      residual_relative_uptake_rate: null,
-      remnant_normalized_gfr: null,
-      serum_uric_acid: null,
-      ldl: null,
-      triglycerid: null,
-      serum_creatinine: null,
-      egfr: null,
-      cystatin_c: null,
-      cystatin_c_egfr: null,
-      creatinine_clearance: null,
-      hr_urine_creatinine: null,
-      na_hr_urine: null,
-      volume_hr_urine: null,
-      bmi: null,
+      Age: null,
+      Sex: null,
+      Weight: null,
+      "Removed side (right or left)": null,
+      "CT volume (right)": null,
+      "CT volume (left)": null,
+      "Total volume": null,
+      "CT volume of remaining kidney/weight": null,
+      "Normalized GFR of remaining kidney": null,
+      "Serum creatinine": null,
+      eGFR: null,
+      "Cystatin-C": null,
+      "Cystatin-C eGFR": null,
+      "24-hour creatinine clearance": null,
+      "24-hour urine creatinine": null,
+      "24-hour urine sodium excretion": null,
       output: null,
     };
   }
@@ -71,7 +55,7 @@ class App extends Component {
     // console.log("fetch flying..", stateObj);
     // "http://54.180.162.218:5000/home" -> aws kt cal server
 
-    return fetch("http://54.180.162.218:5000/home", {
+    return fetch("http://localhost:5000/home", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -84,14 +68,20 @@ class App extends Component {
   };
 
   render() {
-    console.log("App.js rendering.. ", this.state);
+    // console.log("App.js rendering.. ", this.state);
     // console.log(String(1));
     // console.log(obj);
 
     return (
-      <Layout className="layout">
+      <Layout className="layout" style={{ background: "white" }}>
         <Header
-          style={{ display: "flex", height: "4.5vh", background: "white" }}
+          style={{
+            display: "flex",
+            height: "4.5vh",
+            background: "white",
+            justifyContent: "space-between",
+            maxWidth: 950,
+          }}
         >
           <div
             style={{
@@ -105,10 +95,7 @@ class App extends Component {
           >
             KDNI (Kidney Donation with Nephrologic Intelligence)
           </div>
-          <img
-            src={shl_img}
-            style={{ height: 27, marginTop: 15, marginLeft: 70 }}
-          />
+          {/* <img src={shl_img} style={{ height: 27, marginTop: 15, right: 90 }} /> */}
         </Header>
         <Content
           style={{
@@ -123,8 +110,8 @@ class App extends Component {
           <div
             style={{
               border: "1px solid #989c9a",
-              height: 860,
-              width: 800,
+              // height: 700,
+              maxWidth: 905,
               marginTop: 10,
               padding: 10,
             }}
@@ -147,32 +134,44 @@ class App extends Component {
                         color: "#2b6e4d",
                       }}
                     >
-                      Baseline information
+                      Basic information
                     </text>
                   </Breadcrumb.Item>
                 </Breadcrumb>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    수술시 나이
+                  <div
+                    style={{
+                      marginLeft: 5,
+                      fontSize: subTitleFontSize,
+                      color: "blue",
+                    }}
+                  >
+                    Age
                   </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        age: event.target.value,
+                        Age: event.target.value,
                       });
                     }}
-                    value={this.state.age}
+                    value={this.state.Age}
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    성별
+                  <div
+                    style={{
+                      marginLeft: 5,
+                      fontSize: subTitleFontSize,
+                      color: "blue",
+                    }}
+                  >
+                    Sex
                   </div>
                   <Select
-                    defaultValue={this.state.sex}
+                    defaultValue={this.state.Sex}
                     style={{ width: 100 }}
                     onChange={(sex) => {
-                      this.setState({ sex: sex });
+                      this.setState({ Sex: sex });
                     }}
                   >
                     <Option value="M">{"M"}</Option>
@@ -187,80 +186,18 @@ class App extends Component {
                 </div>
                 <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Height (cm)
+                    Weight
                   </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        height: event.target.value,
-                        bmi:
-                          Math.round(
-                            (Number(this.state.weight) /
-                              (Number(this.state.height) / 100) ** 2) *
-                              100
-                          ) / 100,
+                        Weight: event.target.value,
                       });
-                      this.refreshFunc();
                     }}
-                    value={this.state.height}
-                  />
-                </div>
-                <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Weight (kg)
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({
-                        weight: event.target.value,
-                        bmi:
-                          Math.round(
-                            (Number(this.state.weight) /
-                              (Number(this.state.height) / 100) ** 2) *
-                              100
-                          ) / 100,
-                      });
-                      this.refreshFunc();
-                    }}
-                    value={this.state.weight}
-                  />
-                </div>
-                <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    SBP
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({ sbp: event.target.value });
-                    }}
-                    value={this.state.sbp}
-                  />
-                </div>
-                <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    DBP
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({ dbp: event.target.value });
-                    }}
-                    value={this.state.dbp}
+                    value={this.state.Weight}
                   />
                 </div>
                 {/* <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    수술부위 (lt: 1, rt:2)
-                  </div>
-                  <Input
-                    onChange={(event) => {
-                      this.setState({
-                        surgery_part: String(event.target.value),
-                      });
-                    }}
-                    value={this.state.surgery_part}
-                  />
-                </div> */}
-                <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
                     Bmi
                   </div>
@@ -276,6 +213,39 @@ class App extends Component {
                     value={this.state.bmi}
                     disabled={true}
                   />
+                </div> */}
+                <div style={{ margin: 10 }}>
+                  <div style={{ marginLeft: 5 }}>
+                    {`Removed side (right or left)`}
+                  </div>
+                  <Select
+                    defaultValue={this.state["Removed side (right or left)"]}
+                    style={{ width: 100 }}
+                    onChange={(side) => {
+                      // right => 2
+                      // left => 1 , 이 숫자 변경 불가능 (모델 학습에 반영됨)
+                      this.state["Removed side (right or left)"] = side;
+                      // this.setState({
+                      //   "Removed side (right(2) or left(1))": side,
+                      // });
+                    }}
+                  >
+                    <Option value="2">{"Right"}</Option>
+                    <Option value="1">{"Left"}</Option>
+                  </Select>
+                  {/* <Input
+                    onChange={(event) => {
+                      this.state["Removed side (right(2) or left(1))"] = String(
+                        event.target.value
+                      );
+                      // this.setState({
+                      //   "Removed side (right(2) or left(1))": String(
+                      //     event.target.value
+                      //   ),
+                      // });
+                    }}
+                    value={this.state["Removed side (right(2) or left(1))"]}
+                  /> */}
                 </div>
               </div>
               <div>
@@ -292,7 +262,7 @@ class App extends Component {
                     </text>
                   </Breadcrumb.Item>
                 </Breadcrumb>
-                <div style={{ margin: 10 }}>
+                {/* <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
                     Serum uric acid
                   </div>
@@ -304,8 +274,8 @@ class App extends Component {
                     }}
                     value={this.state.serum_uric_acid}
                   />
-                </div>
-                <div style={{ margin: 10 }}>
+                </div> */}
+                {/* <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
                     LDL
                   </div>
@@ -315,8 +285,8 @@ class App extends Component {
                     }}
                     value={this.state.ldl}
                   />
-                </div>
-                <div style={{ margin: 10 }}>
+                </div> */}
+                {/* <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
                     Triglycerid
                   </div>
@@ -328,95 +298,137 @@ class App extends Component {
                     }}
                     value={this.state.triglycerid}
                   />
-                </div>
+                </div> */}
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                  <div
+                    style={{
+                      marginLeft: 5,
+                      fontSize: subTitleFontSize,
+                      color: "blue",
+                    }}
+                  >
                     Serum creatinine
                   </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        serum_creatinine: event.target.value,
+                        "Serum creatinine": event.target.value,
                       });
                     }}
-                    value={this.state.serum_creatinine}
+                    value={this.state["Serum creatinine"]}
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                  <div
+                    style={{
+                      marginLeft: 5,
+                      fontSize: subTitleFontSize,
+                      color: "blue",
+                    }}
+                  >
                     eGFR
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ egfr: event.target.value });
+                      this.setState({ eGFR: event.target.value });
                     }}
-                    value={this.state.egfr}
+                    value={this.state.eGFR}
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                  <div
+                    style={{
+                      marginLeft: 5,
+                      fontSize: subTitleFontSize,
+                      color: "blue",
+                    }}
+                  >
                     Cystatin-C
                   </div>
                   <Input
                     onChange={(event) => {
-                      this.setState({ cystatin_c: event.target.value });
+                      this.setState({ "Cystatin-C": event.target.value });
                     }}
-                    value={this.state.cystatin_c}
+                    value={this.state["Cystatin-C"]}
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
+                  <div
+                    style={{
+                      marginLeft: 5,
+                      fontSize: subTitleFontSize,
+                      color: "blue",
+                    }}
+                  >
                     Cystatin-C eGFR
                   </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        cystatin_c_egfr: event.target.value,
+                        "Cystatin-C eGFR": event.target.value,
                       });
                     }}
-                    value={this.state.cystatin_c_egfr}
+                    value={this.state["Cystatin-C eGFR"]}
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Creatinine clearance
+                  <div
+                    style={{
+                      marginLeft: 5,
+                      fontSize: subTitleFontSize,
+                      color: "blue",
+                    }}
+                  >
+                    24-hour creatinine clearance
                   </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        creatinine_clearance: event.target.value,
+                        "24-hour creatinine clearance": event.target.value,
                       });
                     }}
-                    value={this.state.creatinine_clearance}
+                    value={this.state["24-hour creatinine clearance"]}
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    24hr urine creatinine
+                  <div
+                    style={{
+                      marginLeft: 5,
+                      fontSize: subTitleFontSize,
+                      color: "blue",
+                    }}
+                  >
+                    24-hour urine creatinine
                   </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        hr_urine_creatinine: event.target.value,
+                        "24-hour urine creatinine": event.target.value,
                       });
                     }}
-                    value={this.state.hr_urine_creatinine}
+                    value={this.state["24-hour urine creatinine"]}
                   />
                 </div>
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Na, 24hr urine
+                  <div
+                    style={{
+                      marginLeft: 5,
+                      fontSize: subTitleFontSize,
+                      color: "blue",
+                    }}
+                  >
+                    24-hour urine sodium excretion
                   </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        na_hr_urine: event.target.value,
+                        "24-hour urine sodium excretion": event.target.value,
                       });
                     }}
-                    value={this.state.na_hr_urine}
+                    value={this.state["24-hour urine sodium excretion"]}
                   />
                 </div>
-                <div style={{ margin: 10 }}>
+                {/* <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
                     Volume 24hr urine
                   </div>
@@ -428,7 +440,7 @@ class App extends Component {
                     }}
                     value={this.state.volume_hr_urine}
                   />
-                </div>
+                </div> */}
               </div>
               <div>
                 <Breadcrumb style={{ margin: "10px" }}>
@@ -446,28 +458,28 @@ class App extends Component {
                 </Breadcrumb>
                 <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Lt.Kidney volume
+                    CT volume (right)
                   </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        lt_kidney_vol: event.target.value,
+                        "CT volume (right)": event.target.value,
                       });
                     }}
-                    value={this.state.lt_kidney_vol}
+                    value={this.state["CT volume (right)"]}
                   />
                 </div>
                 <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Rt.Kidney volume
+                    CT volume (left)
                   </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        rt_kidney_vol: event.target.value,
+                        "CT volume (left)": event.target.value,
                       });
                     }}
-                    value={this.state.rt_kidney_vol}
+                    value={this.state["CT volume (left)"]}
                   />
                 </div>
                 <div style={{ margin: 10 }}>
@@ -476,12 +488,38 @@ class App extends Component {
                   </div>
                   <Input
                     disabled={true}
-                    onChange={(event) => {
-                      this.setState({ total_vol: event.target.value });
-                    }}
+                    onChange={(event) => {}}
                     value={
-                      Number(this.state.lt_kidney_vol) +
-                      Number(this.state.rt_kidney_vol)
+                      Number(this.state["CT volume (right)"]) +
+                      Number(this.state["CT volume (left)"])
+                    }
+                  />
+                </div>
+                <div style={{ margin: 10 }}>
+                  <div
+                    style={{
+                      marginLeft: 5,
+                      fontSize: subTitleFontSize,
+                      color: "blue",
+                    }}
+                  >
+                    CT volume of remaining kidney/weight
+                  </div>
+                  <Input
+                    disabled={true}
+                    onChange={(event) => {}}
+                    value={
+                      this.state["Removed side (right or left)"] === "2"
+                        ? Math.round(
+                            (this.state["CT volume (left)"] /
+                              this.state["Weight"]) *
+                              100
+                          ) / 100
+                        : Math.round(
+                            (this.state["CT volume (right)"] /
+                              this.state["Weight"]) *
+                              100
+                          ) / 100
                     }
                   />
                 </div>
@@ -500,8 +538,7 @@ class App extends Component {
                     </text>
                   </Breadcrumb.Item>
                 </Breadcrumb>
-
-                <div style={{ margin: 10 }}>
+                {/* <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
                     Predicted GFR, Lt
                   </div>
@@ -582,7 +619,7 @@ class App extends Component {
                     }}
                     value={this.state.relative_uptake_rate_rt}
                   />
-                </div>
+                </div> */}
                 {/* <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
                     잔여상대섭취율(%)
@@ -599,27 +636,36 @@ class App extends Component {
                   />
                 </div> */}
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Remnant normalized GFR
+                  <div
+                    style={{
+                      marginLeft: 5,
+                      fontSize: subTitleFontSize,
+                      color: "blue",
+                    }}
+                  >
+                    Normalized GFR of remaining kidney
                   </div>
                   <Input
                     onChange={(event) => {
                       this.setState({
-                        remnant_normalized_gfr: event.target.value,
+                        "Normalized GFR of remaining kidney":
+                          event.target.value,
                       });
                     }}
-                    value={this.state.remnant_normalized_gfr}
+                    value={this.state["Normalized GFR of remaining kidney"]}
                   />
                 </div>
-                <div>
+                <div
+                  style={{
+                    marginLeft: 60,
+                    marginTop: 315,
+                  }}
+                >
                   <Button
                     type="primary"
                     size="large"
                     style={{
                       backgroundColor: "#2b6e4d",
-                      marginLeft: 15,
-                      marginRight: 20,
-                      marginTop: 170,
                       width: 160,
                       height: 60,
                       fontFamily: "monospace",
@@ -650,35 +696,59 @@ class App extends Component {
               <div style={{ display: "flex" }}>
                 <div
                   style={{
-                    border: "1px solid #cccfce",
-                    width: 740,
+                    // border: "1px solid #cccfce",
+                    // minWidth: 880,
+                    // overflow: "hidden",
                     height: "8vh",
-                    marginLeft: 20,
-                    padding: 5,
+                    // marginLeft: 20,
+                    // padding: 5,
                   }}
                 >
-                  {this.state.output == null ? null : (
-                    <div>
+                  {
+                    this.state.output == null ? null : this.state[
+                        "Removed side (right or left)"
+                      ] === "2" ? (
                       <div>
-                        왼쪽 신장 수술 이후 예상되는 환자의 eGFR은
+                        오른쪽 신장 제거 이후 예상되는 환자의 eGFR은
                         {
                           <span style={{ fontWeight: "bold" }}>
-                            {" " + this.state.output[0] + " "}
+                            {" " + this.state.output + " "}
                           </span>
                         }
                         입니다.
                       </div>
+                    ) : (
                       <div>
-                        오른쪽 신장 수술 이후 예상되는 환자의 eGFR은
+                        왼쪽 신장 제거 이후 예상되는 환자의 eGFR은
                         {
                           <span style={{ fontWeight: "bold" }}>
-                            {" " + this.state.output[1] + " "}
+                            {" " + this.state.output + " "}
                           </span>
                         }
                         입니다.
                       </div>
-                    </div>
-                  )}
+                    )
+                    // <div>
+                    //   <div>
+                    //     왼쪽 신장 수술 이후 예상되는 환자의 eGFR은
+                    //     {
+                    //       <span style={{ fontWeight: "bold" }}>
+                    //         {" " + this.state.output[0] + " "}
+                    //       </span>
+                    //     }
+                    //     입니다.
+                    //   </div>
+                    //   <div>
+                    //     오른쪽 신장 수술 이후 예상되는 환자의 eGFR은
+                    //     {
+                    //       <span style={{ fontWeight: "bold" }}>
+                    //         {" " + this.state.output[1] + " "}
+                    //       </span>
+                    //     }
+                    //     입니다.
+                    //   </div>
+                    // </div>
+                  }
                 </div>
               </div>
             </div>

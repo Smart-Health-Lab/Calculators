@@ -8,103 +8,120 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.pipeline import Pipeline
 from utils import *
+import json
 
 app = Flask(__name__)
 
 CORS(app)
 
 app_state_mapping = {
-    'age': '수술시나이',
-    'sex': '성별',
-    'height': 'HEIGHT',
-    'weight': 'WEIGHT',
-    'sbp': 'SBP',
-    'dbp': 'DBP',
-    'surgery_part': '수술부위',
-    'lt_kidney_vol': 'Lt. Kidney volume',
-    'rt_kidney_vol': 'Rt. Kidney volume',
-    'total_vol': 'Total volume',
-    'remnant_vol': 'Remnant Volume',
-    'remnant_vol_per': 'Remnant Volume percentage',
-    'predicted_gfr_total': 'Predicted GFR, total',
-    'predicted_gfr_lt': 'Predicted GFR, Lt.',
-    'predicted_gfr_rt': 'Predicted GFR, Rt.',
-    'normalized_gfr': 'Normalized GFR',
-    'relative_uptake_rate_lt': '상대섭취율(Lt, %)',
-    'relative_uptake_rate_rt': '상대섭취율(Rt, %)',
-    'residual_relative_uptake_rate': '잔여상대섭취율(%)',
-    'remnant_normalized_gfr': 'Remant normalized GFR',
-    'serum_uric_acid': 'Serum uric acid.prior',
-    'ldl': 'LDL.prior',
-    'triglycerid': 'Triglyceride.prior',
-    'serum_creatinine': 'Serum creatinine.prior',
-    'egfr': 'eGFR.prior',
-    'cystatin_c': 'Cystatin-C.prior',
-    'cystatin_c_egfr': 'Cystatin-C eGFR.prior',
-    'creatinine_clearance': 'Creatinine clearance.prior',
-    'hr_urine_creatinine': '24hr urine creatinine.prior',
-    'na_hr_urine': 'Na, 24hr urine.prior',
-    'volume_hr_urine': 'Volume 24hr urine.prior',
-    'bmi': 'bmi',
+    "eGFR": "eGFR.prior",
+    "CT volume of remaining kidney/weight": "Remnant Volume_weight",
+    "Normalized GFR of remaining kidney": "Remant normalized GFR",
+    "Age": "수술시나이",
+    "Serum creatinine": "Serum creatinine.prior",
+    "Cystatin-C eGFR": "Cystatin-C eGFR.prior",
+    "24-hour urine sodium excretion": "Na, 24hr urine.prior",
+    "24-hour creatinine clearance": "Creatinine clearance.prior",
+    "24-hour urine creatinine": "24hr urine creatinine.prior",
+    "Cystatin-C": "Cystatin-C.prior",
+    "Sex": "성별",
+    "CT volume (right)": "Rt. Kidney volume",
+    "CT volume (left)": "Lt. Kidney volume",
+    "Removed side (right or left)": "수술부위",
+    "Total volume": "Total volume",
+    "Weight": "WEIGHT",
 }
 
-sample_dataframe = pd.read_csv(
-    './sample_dataframe/sample_df.csv').drop(columns='Unnamed: 0')
+# sample_dataframe = pd.read_csv(
+#     './sample_dataframe/sample_df.csv').drop(columns='Unnamed: 0')
 
-except_col = ['개인정보동의여부', '정렬순서', '환자번호',
-              '수술일(첨부)', '이름', 'CT결과', 'DTPA결과', 'R_or_L']
-except_col.extend(sample_dataframe.iloc[:, 38:66].columns)
-total_columns = [col for col in list(
-    sample_dataframe.columns) if col not in except_col]
-categorical_col = ['성별', '수술부위']
+total_columns = [
+    'eGFR.prior', 'Remnant Volume_weight', 'Remant normalized GFR', '수술시나이', 'Serum creatinine.prior', 'Cystatin-C eGFR.prior', '성별',
+    'Na, 24hr urine.prior', 'Creatinine clearance.prior', '24hr urine creatinine.prior', 'Cystatin-C.prior'
+]
+categorical_col = ['성별']
 numeric_col = [col for col in total_columns if col not in categorical_col]
 
-XGBr = XGBRegressor(n_jobs=16)
-XGBr.load_model("./utils/kt_xgbr_weights.json")
-cat_pipe = joblib.load("./utils/cat_pipe.joblib")
+# train_df, test_df = train_test_split(kidney_df, test_size=0.2, random_state=42)
+
+# cat_pipe = Pipeline([('onehot', OneHotEncoder(handle_unknown='ignore'))])
+# trainX_cat = cat_pipe.fit_transform(
+#     train_df[categorical_col].astype(str).values)
+# trainX_num = train_df[numeric_col].values
+# trainX = np.concatenate((trainX_num, trainX_cat.toarray()), axis=1)
+
+# testX_cat = cat_pipe.transform(test_df[categorical_col].astype(str).values)
+# testX_num = test_df[numeric_col].values
+# testX = np.concatenate((testX_num, testX_cat.toarray()), axis=1)
+
+# trainY = train_df['eGFR.final']
+# testY = test_df['eGFR.final']
+# testY_boot = np.array(testY)
+
+XGBr = XGBRegressor(n_jobs=4, random_state=42)
+XGBr.load_model("./utils/XGBmodel_tunned(2022.12.05).json")
+cat_pipe = joblib.load("./utils/cat_pipe(2022.12.05).joblib")
 
 
 @app.route('/home', methods=['POST'])
 def home():
     client_state_dict = request.get_json()
+    print("client_state_dict =============>", client_state_dict)
+    pop_key_list = [
+        'Weight', 'Removed side (right or left)', 'CT volume (right)',
+        'CT volume (left)', 'Total volume', 'output'
+    ]
+    for pop_key in pop_key_list:
+        client_state_dict.pop(pop_key)
+    print("poped client_state_dict =============>", client_state_dict)
 
-    check_arr = ['sex', 'surgery_part', 'output']
-    client_state_dict = dict({(key, float(val)) if key not in check_arr else (
-        key, val) for key, val in client_state_dict.items()})
-    client_state_dict.pop('output')
+    # check_arr = ['sex', 'surgery_part', 'output']
+    # client_state_dict = dict({(key, float(val)) if key not in check_arr else (
+    #     key, val) for key, val in client_state_dict.items()})
+    # client_state_dict.pop('output')
 
     input_dict = {app_state_mapping.get(
         key): val for key, val in client_state_dict.items()}
     input_df = pd.DataFrame([input_dict])
 
-    # Left predict
-    input_df['수술부위'] = "1"
-    input_df['Remnant Volume'] = input_df['Rt. Kidney volume']
-    input_df['Remnant Volume percentage'] = round(
-        (input_df['Rt. Kidney volume'] / input_df['Total volume'])*100, 2)
-    input_df['잔여상대섭취율(%)'] = input_df['상대섭취율(Rt, %)']
+    # predcit
     inputX_cat = cat_pipe.transform(
         input_df[categorical_col].astype(str).values)
     inputX_num = input_df[numeric_col].values
     inputX = np.concatenate((inputX_num, inputX_cat.toarray()), axis=1)
-    predicted_val_Lt = XGBr.predict(inputX)[0]
+    predicted_val = XGBr.predict(inputX)[0]
+    predicted_val = round(predicted_val, 2)
+    print("predicted value =========>", predicted_val)
 
-    # Right predict
-    input_df['수술부위'] = "2"
-    input_df['Remnant Volume'] = input_df['Lt. Kidney volume']
-    input_df['Remnant Volume percentage'] = round(
-        (input_df['Lt. Kidney volume'] / input_df['Total volume'])*100, 2)
-    input_df['잔여상대섭취율(%)'] = input_df['상대섭취율(Lt, %)']
-    inputX_cat = cat_pipe.transform(
-        input_df[categorical_col].astype(str).values)
-    inputX_num = input_df[numeric_col].values
-    inputX = np.concatenate((inputX_num, inputX_cat.toarray()), axis=1)
-    predicted_val_Rt = XGBr.predict(inputX)[0]
+    # # Left predict
+    # input_df['수술부위'] = "1"
+    # input_df['Remnant Volume'] = input_df['Rt. Kidney volume']
+    # input_df['Remnant Volume percentage'] = round(
+    #     (input_df['Rt. Kidney volume'] / input_df['Total volume'])*100, 2)
+    # input_df['잔여상대섭취율(%)'] = input_df['상대섭취율(Rt, %)']
+    # inputX_cat = cat_pipe.transform(
+    #     input_df[categorical_col].astype(str).values)
+    # inputX_num = input_df[numeric_col].values
+    # inputX = np.concatenate((inputX_num, inputX_cat.toarray()), axis=1)
+    # predicted_val_Lt = XGBr.predict(inputX)[0]
 
-    print("predicted_Lt : ", predicted_val_Lt)
-    print("predicted_Rt : ", predicted_val_Rt)
+    # # Right predict
+    # input_df['수술부위'] = "2"
+    # input_df['Remnant Volume'] = input_df['Lt. Kidney volume']
+    # input_df['Remnant Volume percentage'] = round(
+    #     (input_df['Lt. Kidney volume'] / input_df['Total volume'])*100, 2)
+    # input_df['잔여상대섭취율(%)'] = input_df['상대섭취율(Lt, %)']
+    # inputX_cat = cat_pipe.transform(
+    #     input_df[categorical_col].astype(str).values)
+    # inputX_num = input_df[numeric_col].values
+    # inputX = np.concatenate((inputX_num, inputX_cat.toarray()), axis=1)
+    # predicted_val_Rt = XGBr.predict(inputX)[0]
 
-    return {"status": 200, "output": [str(round(predicted_val_Lt, 3)), str(round(predicted_val_Rt, 3))]}
+    # print("predicted_Lt : ", predicted_val_Lt)
+    # print("predicted_Rt : ", predicted_val_Rt)
+
+    return {"status": 200, "output": json.dumps(str(predicted_val))}
 
 
 app.run(host='0.0.0.0', debug=True)
