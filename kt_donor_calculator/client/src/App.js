@@ -709,23 +709,23 @@ class App extends Component {
                         "Removed side (right or left)"
                       ] === "2" ? (
                       <div>
-                        오른쪽 신장 제거 이후 예상되는 환자의 eGFR은
+                        The donor's expected eGFR after removal of the right
+                        kidney is
                         {
                           <span style={{ fontWeight: "bold" }}>
                             {" " + this.state.output + " "}
                           </span>
                         }
-                        입니다.
                       </div>
                     ) : (
                       <div>
-                        왼쪽 신장 제거 이후 예상되는 환자의 eGFR은
+                        The donor's expected eGFR after removal of the left
+                        kidney is
                         {
                           <span style={{ fontWeight: "bold" }}>
                             {" " + this.state.output + " "}
                           </span>
                         }
-                        입니다.
                       </div>
                     )
                     // <div>
