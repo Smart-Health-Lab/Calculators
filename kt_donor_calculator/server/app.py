@@ -67,14 +67,14 @@ cat_pipe = joblib.load("./utils/cat_pipe(2022.12.05).joblib")
 @app.route('/home', methods=['POST'])
 def home():
     client_state_dict = request.get_json()
-    print("client_state_dict =============>", client_state_dict)
+    # print("client_state_dict =============>", client_state_dict)
     pop_key_list = [
         'Weight', 'Removed side (right or left)', 'CT volume (right)',
         'CT volume (left)', 'Total volume', 'output'
     ]
     for pop_key in pop_key_list:
         client_state_dict.pop(pop_key)
-    print("poped client_state_dict =============>", client_state_dict)
+    # print("poped client_state_dict =============>", client_state_dict)
 
     # check_arr = ['sex', 'surgery_part', 'output']
     # client_state_dict = dict({(key, float(val)) if key not in check_arr else (
@@ -92,7 +92,7 @@ def home():
     inputX = np.concatenate((inputX_num, inputX_cat.toarray()), axis=1)
     predicted_val = XGBr.predict(inputX)[0]
     predicted_val = round(predicted_val, 2)
-    print("predicted value =========>", predicted_val)
+    # print("predicted value =========>", predicted_val)
 
     # # Left predict
     # input_df['수술부위'] = "1"
