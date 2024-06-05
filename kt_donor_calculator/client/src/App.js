@@ -595,13 +595,11 @@ class App extends Component {
                         kidney is
                         {
                           <span style={{ fontWeight: "bold" }}>
-                            {" " +
-                              this.state.output +
-                              "mL/min/1.73m" +
-                              <sup>2</sup> +
-                              "."}
+                            {" " + this.state.output}
                           </span>
-                        }
+                        }{" "}
+                        mL/min/1.73m <sup>2</sup>
+                        {"."}
                       </div>
                     )
                   ) : (
