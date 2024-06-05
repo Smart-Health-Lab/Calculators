@@ -68,6 +68,44 @@ class App extends Component {
     });
   };
 
+  egfrFunc = () => {
+    let result = 0;
+    let seg01 = 0;
+    let seg02 = 0;
+    let seg03 = 0;
+    let seg04 = 0;
+    let seg05 = 0;
+
+    if (this.state["Sex"] === "F") {
+      seg01 = 141;
+      seg02 =
+        Math.round(
+          Math.min(this.state["Serum creatinine"] / 0.7, 1) ** -0.329 * 100
+        ) / 100;
+      seg03 =
+        Math.round(
+          Math.max(this.state["Serum creatinine"] / 0.7, 1) ** -1.209 * 100
+        ) / 100;
+      seg04 = Math.round(0.993 ** this.state["Age"] * 100) / 100;
+      seg05 = 1.018;
+      result = Math.round(seg01 * seg02 * seg03 * seg04 * seg05 * 100) / 100;
+    } else {
+      seg01 = 141;
+      seg02 =
+        Math.round(
+          Math.min(this.state["Serum creatinine"] / 0.9, 1) ** -0.411 * 100
+        ) / 100;
+      seg03 =
+        Math.round(
+          Math.max(this.state["Serum creatinine"] / 0.9, 1) ** -1.209 * 100
+        ) / 100;
+      seg04 = Math.round(0.993 ** this.state["Age"] * 100) / 100;
+      seg05 = 1;
+      result = Math.round(seg01 * seg02 * seg03 * seg04 * seg05 * 100) / 100;
+    }
+    return result;
+  };
+
   render() {
     // console.log("App.js rendering.. ", this.state);
     // console.log(String(1));
@@ -302,7 +340,7 @@ class App extends Component {
                       submit_clicked = false;
                       this.setState({ eGFR: event.target.value });
                     }}
-                    value={this.state.eGFR}
+                    value={this.egfrFunc()}
                   />
                 </div>
                 <div style={{ margin: 10 }}>
@@ -342,7 +380,11 @@ class App extends Component {
                         "Cystatin-C eGFR": event.target.value,
                       });
                     }}
-                    value={this.state["Cystatin-C eGFR"]}
+                    value={
+                      Math.round((79.901 / this.state["Cystatin-C"]) * 100) /
+                      100
+                    }
+                    // value={this.state["Cystatin-C eGFR"]}
                   />
                 </div>
                 <div style={{ margin: 10 }}>
@@ -543,6 +585,58 @@ class App extends Component {
                       fontSize: 20,
                     }}
                     onClick={() => {
+                      if (this.state["Age"] <= 0 || isNaN(this.state["Age"])) {
+                        this.setState({ Age: 45 });
+                      } else if (
+                        this.state["Weight"] <= 0 ||
+                        isNaN(this.state["Weight"])
+                      ) {
+                        this.setState({ Weight: 65.4 });
+                      } else if (
+                        this.state["Serum creatinine"] <= 0 ||
+                        isNaN(this.state["Serum creatinine"])
+                      ) {
+                        this.setState({ "Serum creatinine": 0.83 });
+                      } else if (
+                        this.state["Cystatin-C"] <= 0 ||
+                        isNaN(this.state["Cystatin-C"])
+                      ) {
+                        this.setState({ "Cystatin-C": 0.54 });
+                      } else if (
+                        this.state["24-hour creatinine clearance"] <= 0 ||
+                        isNaN(this.state["24-hour creatinine clearance"])
+                      ) {
+                        this.setState({ "24-hour creatinine clearance": 79 });
+                      } else if (
+                        this.state["24-hour urine creatinine"] <= 0 ||
+                        isNaN(this.state["24-hour urine creatinine"])
+                      ) {
+                        this.setState({ "24-hour urine creatinine": 0.9 });
+                      } else if (
+                        this.state["24-hour urine sodium excretion"] <= 0 ||
+                        isNaN(this.state["24-hour urine sodium excretion"])
+                      ) {
+                        this.setState({
+                          "24-hour urine sodium excretion": 101,
+                        });
+                      } else if (
+                        this.state["CT volume (right)"] <= 0 ||
+                        isNaN(this.state["CT volume (right)"])
+                      ) {
+                        this.setState({ "CT volume (right)": 134 });
+                      } else if (
+                        this.state["CT volume (left)"] <= 0 ||
+                        isNaN(this.state["CT volume (left)"])
+                      ) {
+                        this.setState({ "CT volume (left)": 112 });
+                      } else if (
+                        this.state["Normalized GFR of remaining kidney"] <= 0 ||
+                        isNaN(this.state["Normalized GFR of remaining kidney"])
+                      ) {
+                        this.setState({
+                          "Normalized GFR of remaining kidney": 52.9,
+                        });
+                      }
                       submit_clicked = true;
                       this.fetchFunc()
                         .then((res) => {
