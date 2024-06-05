@@ -528,8 +528,8 @@ class App extends Component {
                 </div>
                 <div
                   style={{
-                    marginLeft: 60,
-                    marginTop: 315,
+                    marginLeft: 80,
+                    marginTop: 330,
                   }}
                 >
                   <Button
