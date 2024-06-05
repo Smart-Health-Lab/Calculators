@@ -90,8 +90,8 @@ class App extends Component {
               color: "#0e7542",
               marginLeft: 3,
               fontSize: 20,
-              fontWeight: 600,
-              width: 600,
+              fontWeight: 500,
+              width: 500,
             }}
           >
             KDNI (Kidney Donation with Nephrologic Intelligence)
