@@ -89,7 +89,7 @@ class App extends Component {
               fontFamily: "serif",
               color: "#0e7542",
               marginLeft: 3,
-              fontSize: 16,
+              fontSize: 18,
               fontWeight: 650,
               width: 650,
             }}
@@ -103,7 +103,7 @@ class App extends Component {
             display: "flex",
             flexDirection: "column",
             // alignItems: "center",
-            marginTop: 50,
+            marginTop: 10,
             padding: "0 50px",
             // height: "85vh",
             background: "white",
