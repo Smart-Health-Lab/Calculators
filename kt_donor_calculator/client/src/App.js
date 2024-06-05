@@ -103,6 +103,7 @@ class App extends Component {
             display: "flex",
             flexDirection: "column",
             // alignItems: "center",
+            top: 20,
             padding: "0 50px",
             // height: "85vh",
             background: "white",
