@@ -587,7 +587,9 @@ class App extends Component {
                           <span style={{ fontWeight: "bold" }}>
                             {" " + this.state.output + ". "}
                           </span>
-                        }
+                        }{" "}
+                        mL/min/1.73m<sup>2</sup>
+                        {"."}
                       </div>
                     ) : (
                       <div>
@@ -598,7 +600,7 @@ class App extends Component {
                             {" " + this.state.output}
                           </span>
                         }{" "}
-                        mL/min/1.73m <sup>2</sup>
+                        mL/min/1.73m<sup>2</sup>
                         {"."}
                       </div>
                     )
