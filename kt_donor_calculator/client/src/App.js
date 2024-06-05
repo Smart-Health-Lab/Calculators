@@ -56,7 +56,7 @@ class App extends Component {
     // console.log("fetch flying..", stateObj);
     // "http://54.180.162.218:5000/home" -> aws kt cal server
 
-    return fetch("http://0.0.0.0:5000/home", {
+    return fetch("http://13.125.88.179:5000/home", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
