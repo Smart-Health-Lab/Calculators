@@ -56,7 +56,7 @@ class App extends Component {
     // console.log("fetch flying..", stateObj);
     // "http://54.180.162.218:5000/home" -> aws kt cal server
 
-    return fetch("http://54.180.162.218:5000/home", {
+    return fetch("http://0.0.0.0:5000/home", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -147,7 +147,7 @@ class App extends Component {
                       color: "blue",
                     }}
                   >
-                    Age
+                    Age (years)
                   </div>
                   <Input
                     onChange={(event) => {
@@ -189,7 +189,7 @@ class App extends Component {
                 </div>
                 <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    Weight
+                    Weight (kg)
                   </div>
                   <Input
                     onChange={(event) => {
@@ -219,9 +219,7 @@ class App extends Component {
                   />
                 </div> */}
                 <div style={{ margin: 10 }}>
-                  <div style={{ marginLeft: 5 }}>
-                    {`Removed side (right or left)`}
-                  </div>
+                  <div style={{ marginLeft: 5 }}>{`Donated side`}</div>
                   <Select
                     defaultValue={this.state["Removed side (right or left)"]}
                     style={{ width: 100 }}
@@ -275,7 +273,7 @@ class App extends Component {
                       color: "blue",
                     }}
                   >
-                    Serum creatinine
+                    Serum creatinine (mg/dL)
                   </div>
                   <Input
                     onChange={(event) => {
@@ -295,9 +293,10 @@ class App extends Component {
                       color: "blue",
                     }}
                   >
-                    eGFR
+                    eGFR (ml/min/1.73m<sup>2</sup>)
                   </div>
                   <Input
+                    disabled={true}
                     onChange={(event) => {
                       submit_clicked = false;
                       this.setState({ eGFR: event.target.value });
@@ -313,7 +312,7 @@ class App extends Component {
                       color: "blue",
                     }}
                   >
-                    Cystatin-C
+                    Cystatin C (mg/L)
                   </div>
                   <Input
                     onChange={(event) => {
@@ -331,9 +330,11 @@ class App extends Component {
                       color: "blue",
                     }}
                   >
-                    Cystatin-C eGFR
+                    {`Cystatin C eGFR`}
+                    <br></br>(mL/min/1.73m<sup>2</sup>)
                   </div>
                   <Input
+                    disabled={true}
                     onChange={(event) => {
                       submit_clicked = false;
                       this.setState({
@@ -351,7 +352,7 @@ class App extends Component {
                       color: "blue",
                     }}
                   >
-                    24-hour creatinine clearance
+                    24-hour urine creatinine clearance (mL/min)
                   </div>
                   <Input
                     onChange={(event) => {
@@ -371,7 +372,7 @@ class App extends Component {
                       color: "blue",
                     }}
                   >
-                    24-hour urine creatinine
+                    24-hour urine creatinine (g/day)
                   </div>
                   <Input
                     onChange={(event) => {
@@ -391,7 +392,7 @@ class App extends Component {
                       color: "blue",
                     }}
                   >
-                    24-hour urine sodium excretion
+                    24-hour urine sodium excretion (mmol/day)
                   </div>
                   <Input
                     onChange={(event) => {
@@ -420,7 +421,7 @@ class App extends Component {
                 </Breadcrumb>
                 <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    CT volume (right)
+                    Right CT volume (cm<sup>3</sup>)
                   </div>
                   <Input
                     onChange={(event) => {
@@ -434,7 +435,7 @@ class App extends Component {
                 </div>
                 <div style={{ margin: 10 }}>
                   <div style={{ marginLeft: 5, fontSize: subTitleFontSize }}>
-                    CT volume (left)
+                    Left CT volume (cm<sup>3</sup>)
                   </div>
                   <Input
                     onChange={(event) => {
@@ -467,7 +468,7 @@ class App extends Component {
                       color: "blue",
                     }}
                   >
-                    CT volume of remaining kidney/weight
+                    CT volume of remaining kidney/weight (cm<sup>3</sup>/kg)
                   </div>
                   <Input
                     disabled={true}
@@ -510,7 +511,8 @@ class App extends Component {
                       color: "blue",
                     }}
                   >
-                    Normalized GFR of remaining kidney
+                    Normalized GFR of remaining kidney (mL/min/1.73m<sup>2</sup>
+                    )
                   </div>
                   <Input
                     onChange={(event) => {
