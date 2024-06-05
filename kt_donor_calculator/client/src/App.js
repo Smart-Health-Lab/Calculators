@@ -88,9 +88,8 @@ class App extends Component {
             style={{
               fontFamily: "serif",
               color: "#0e7542",
-              margin: 20,
               marginLeft: 3,
-              fontSize: 18,
+              fontSize: 16,
               fontWeight: 650,
               width: 650,
             }}
